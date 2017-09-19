@@ -1,0 +1,11 @@
+# Gradle
+gradle/
+.gradle/
+build/
+
+# IntelliJ
+.idea/
+podcast-vertx.iml
+
+# Vim
+*.sw[po]
