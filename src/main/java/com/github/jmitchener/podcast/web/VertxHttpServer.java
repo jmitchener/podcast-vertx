@@ -7,6 +7,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.ext.web.Router;
+import io.vertx.ext.web.handler.StaticHandler;
 
 /**
  * Main HTTP server application
@@ -21,8 +22,9 @@ public class VertxHttpServer {
         HttpServer server = vertx.createHttpServer();
 
         Router router = Router.router(vertx);
+        router.route().handler(StaticHandler.create());
 
-        router.route().handler(routingContext -> {
+        router.route("/api/*").handler(routingContext -> {
 
             // This handler will be called for every request
             HttpServerResponse response = routingContext.response();
@@ -30,6 +32,10 @@ public class VertxHttpServer {
 
             // Write to the response and end it
             response.end("Hello World from Vert.x-Web!");
+        });
+
+        router.route("/podcasts/*").handler(routingContext -> {
+
         });
 
         final int httpPort = getHttpPort();
